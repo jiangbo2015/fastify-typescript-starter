@@ -1,4 +1,4 @@
-# GraphQL Server Example with `fastify-graphql`
+# GraphQL Server Example with `fastify-typescript-starter`
 
 - fastify-cors
 - fastify-jwt

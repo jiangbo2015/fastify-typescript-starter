@@ -1,5 +1,5 @@
 {
-  "name": "typescript-graphql-fastify",
+  "name": "fastify-typescript-starter",
   "license": "MIT",
   "scripts": {
     "start": "node dist/server",
