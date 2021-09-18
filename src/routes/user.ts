@@ -1,5 +1,4 @@
 import { FastifyPluginCallback, FastifySchema } from "fastify"
-
 import { Static, Type } from "@sinclair/typebox"
 import prisma from "../prisma"
 
@@ -9,7 +8,7 @@ const User = Type.Object({
 })
 
 const UserParams = Type.Object({
-  title: Type.String(),
+  name: Type.Optional(Type.String()),
 })
 
 type UserType = Static<typeof User>
@@ -31,7 +30,6 @@ const postRoutes: FastifyPluginCallback = (fastify, opts, done) => {
         },
       },
       (res, reply) => {
-        prisma.user.findMany()
         reply.send("good")
       }
     )
@@ -41,7 +39,7 @@ const postRoutes: FastifyPluginCallback = (fastify, opts, done) => {
     .post("/update", (res, reply) => {
       reply.send("good")
     })
-    .get<{ Querystring: UserType }>(
+    .get<{ Querystring: Static<typeof UserParams> }>(
       "/list",
       {
         schema: {
@@ -49,8 +47,13 @@ const postRoutes: FastifyPluginCallback = (fastify, opts, done) => {
           querystring: UserParams,
         },
       },
-      (res, reply) => {
-        reply.send("good")
+      async (res, reply) => {
+        const data = await prisma.user.findMany({
+          where: {
+            name: res.query.name,
+          },
+        })
+        reply.send({ data })
       }
     )
   done()
