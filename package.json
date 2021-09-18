@@ -3,18 +3,23 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server",
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server"
+    "dev": "ts-node-dev --respawn --exit-child src/server.ts"
   },
   "dependencies": {
     "@prisma/client": "3.0.2",
-    "fastify": "3.21.1"
+    "@sinclair/typebox": "^0.20.5",
+    "fastify": "3.21.3",
+    "fastify-autoload": "^3.9.0",
+    "fastify-cors": "^6.0.2",
+    "fastify-jwt": "^3.0.1",
+    "fastify-swagger": "^4.12.0"
   },
   "devDependencies": {
-    "@types/node": "16.4.13",
-    "typescript": "4.4.3",
+    "@types/node": "16.9.2",
+    "prisma": "3.0.2",
     "ts-node": "10.2.1",
     "ts-node-dev": "1.1.8",
-    "prisma": "3.0.2"
+    "typescript": "4.4.3"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
